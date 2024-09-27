@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Shohada List</h1>
+    <div class="row">
+        {% for shahid in shahid_list %}
+            <div class="col-md-4">
+                <div class="card">
+                    <img class="card-img-top" src="{{ shahid.image.url }}" alt="Shahid Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ shahid.name }} {{ shahid.lname }}</h5>
+                        <p class="card-text">Martyrdom Location: {{ shahid.martyrdom_location }}</p>
+                        <p class="card-text">Martyrdom Date: {{ shahid.martyrdom_date }}</p>
+                        <p class="card-text">{{ shahid.description }}</p>
+                        <a href="{% url 'shahid:shahid_detail' shahid.slug %}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

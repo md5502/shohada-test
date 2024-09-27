@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{{ shahid.name }} {{ shahid.lname }}</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <img class="img-fluid" src="{{ shahid.image.url }}" alt="Shahid Image">
+        </div>
+        <div class="col-md-8">
+            <h2>Martyrdom Details</h2>
+            <p><strong>Martyrdom Location:</strong> {{ shahid.martyrdom_location }}</p>
+            <p><strong>Martyrdom Date:</strong> {{ shahid.martyrdom_date }}</p>
+            <h2>Description</h2>
+            <p>{{ shahid.description }}</p>
+            {% if shahid.qr_code_image %}
+                <h2>QR Code</h2>
+                <img class="img-fluid" src="{{ shahid.image.url }}" alt="Shahid QR Code">
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
