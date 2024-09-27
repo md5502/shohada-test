@@ -8,7 +8,8 @@ class Shahid(models.Model):
     martyrdom_date = models.DateField()
     description = models.TextField()
     image = models.ImageField(upload_to="shohada_images")
-    slug = models.SlugField(null=True, blank=True)
+    slug = models.SlugField(null=True, blank=True, unique=True, allow_unicode=True)
+    qr_code_image = models.ImageField(upload_to="shohada_qrcodes", null=True, blank=True)
 
     def __str__(self) -> str:
         return f"{self.name} {self.lname}"
