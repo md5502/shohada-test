@@ -1,18 +1,23 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1>Shohada List</h1>
+    <h1 class="text-right">لیست شهداء</h1> <!-- راست‌چین -->
     <div class="row">
         {% for shahid in shahid_list %}
             <div class="col-md-4">
                 <div class="card">
-                    <img class="card-img-top" src="{{ shahid.image.url }}" alt="Shahid Image">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ shahid.name }} {{ shahid.lname }}</h5>
-                        <p class="card-text">Martyrdom Location: {{ shahid.martyrdom_location }}</p>
-                        <p class="card-text">Martyrdom Date: {{ shahid.martyrdom_date }}</p>
+                    {% if shahid.images.all %}
+                        <img class="card-img-top" src="{{ shahid.images.first.image.url }}" alt="تصویر شهید"> <!-- عکس اول به عنوان عکس شاخص -->
+                    {% else %}
+                        <img class="card-img-top" src="{% static 'default-image.jpg' %}" alt="تصویر پیش‌فرض"> <!-- تصویر پیش‌فرض در صورت عدم وجود تصویر -->
+                    {% endif %}
+                    <div class="card-body text-right"> <!-- راست‌چین کردن متن -->
+                        <h5 class="card-title">{{ shahid.first_name }} {{ shahid.last_name }}</h5>
+                        <p class="card-text">محل شهادت: {{ shahid.martyrdom_location }}</p>
+                        <p class="card-text">تاریخ شهادت: {{ shahid.martyrdom_date }}</p>
                         <p class="card-text">{{ shahid.description }}</p>
-                        <a href="{% url 'shahid:shahid_detail' shahid.slug %}" class="btn btn-primary">View Details</a>
+                        <a href="{% url 'shahid:shahid_detail' shahid.slug %}" class="btn btn-primary">مشاهده جزئیات</a>
                     </div>
                 </div>
             </div>

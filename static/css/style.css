@@ -1,0 +1,44 @@
+body {
+    text-align: right;
+    direction: rtl;
+    font-family: 'Vazir', sans-serif; /* فرض بر اینکه از فونت ایرانی مانند "وزیر" استفاده شود */
+}
+
+.navbar .navbar-nav .nav-link {
+    margin-right: 0;
+    margin-left: 1rem;
+}
+
+
+/* استایل برای راست‌چین کردن کل صفحه */
+.text-right {
+    text-align: right;
+    direction: rtl;
+}
+
+/* استایل کارت‌ها */
+.card-body {
+    text-align: right;
+    direction: rtl;
+    font-family: 'Vazir', sans-serif; /* استفاده از فونت فارسی دلخواه */
+}
+
+.card-title, .card-text {
+    margin-bottom: 10px;
+}
+
+.text-right {
+    text-align: right;
+    direction: rtl;
+}
+
+h1, h2 {
+    font-family: 'Vazir', sans-serif; /* استفاده از فونت فارسی دلخواه */
+    margin-bottom: 15px;
+}
+
+p {
+    font-family: 'Vazir', sans-serif;
+    margin-bottom: 10px;
+}
+

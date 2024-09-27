@@ -1,21 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>{{ shahid.name }} {{ shahid.lname }}</h1>
+    <h1 class="text-right">{{ shahid.first_name }} {{ shahid.last_name }}</h1> <!-- Updated field references -->
     <div class="row">
-        <div class="col-md-4">
-            <img class="img-fluid" src="{{ shahid.image.url }}" alt="Shahid Image">
+        <div class="col-md-6">
+            <!-- اسلایدشو تصاویر -->
+            <div id="shahidCarousel" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    {% for image in shahid.images.all %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img class="d-block w-100" style="height: 300px; object-fit: cover;" src="{{ image.image.url }}" alt="تصویر شهید">
+                    </div>
+                    {% endfor %}
+                </div>
+                <a class="carousel-control-prev" href="#shahidCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">قبلی</span>
+                </a>
+                <a class="carousel-control-next" href="#shahidCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">بعدی</span>
+                </a>
+            </div>
         </div>
-        <div class="col-md-8">
-            <h2>Martyrdom Details</h2>
-            <p><strong>Martyrdom Location:</strong> {{ shahid.martyrdom_location }}</p>
-            <p><strong>Martyrdom Date:</strong> {{ shahid.martyrdom_date }}</p>
-            <h2>Description</h2>
+        <div class="col-md-6 text-right">
+            <h2>جزئیات شهادت</h2>
+            <p><strong>محل شهادت:</strong> {{ shahid.martyrdom_location }}</p>
+            <p><strong>تاریخ شهادت:</strong> {{ shahid.martyrdom_date }}</p>
+            <p><strong>تاریخ تولد:</strong> {{ shahid.birth_date }}</p> <!-- New field for birth date -->
+            <p><strong>مکان تولد:</strong> {{ shahid.birth_location }}</p> <!-- New field for birth location -->
+            <h2>توضیحات</h2>
             <p>{{ shahid.description }}</p>
-            {% if shahid.qr_code_image %}
-                <h2>QR Code</h2>
-                <img class="img-fluid" src="{{ shahid.image.url }}" alt="Shahid QR Code">
-            {% endif %}
+            <h2>وصیت‌نامه</h2>
+            <p>{{ shahid.will }}</p> <!-- Display will -->
+            <h2>نقل قول‌های مهم</h2>
+            <p>{{ shahid.important_quotes }}</p> <!-- Display important quotes -->
+            
+            <!-- دکمه برای دانلود همه تصاویر -->
+            <a href="{% url 'shahid:download_shahid_images' shahid.slug %}" class="btn btn-success">دانلود همه تصاویر</a>
+            
+            <!-- دکمه برای دریافت QR Code -->
+            <a href="{% url 'shahid:generate_qr_code' shahid.slug %}" class="btn btn-info">دریافت QR Code</a>
         </div>
     </div>
 {% endblock %}
